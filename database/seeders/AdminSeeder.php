@@ -10,14 +10,16 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        DB::table('users')->insert([
-            'name'       => 'Super Admin',
-            'email'      => 'admin@sekolah.sch.id',
-            'password'   => Hash::make('admin123'),
-            'role_id'    => 1,
-            'kelas_id'   => null,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
+        DB::table('users')->updateOrInsert(
+            ['email' => 'admin@sekolah.sch.id'],
+            [
+                'name'       => 'Super Admin',
+                'password'   => Hash::make('admin123'),
+                'role_id'    => 1,
+                'kelas_id'   => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
     }
 }
