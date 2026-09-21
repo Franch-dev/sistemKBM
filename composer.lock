@@ -1344,6 +1344,7 @@
             "time": "2026-06-26T00:11:25+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "laravel/sanctum",
             "version": "v4.3.3",
             "source": {
@@ -1407,6 +1408,8 @@
             "time": "2026-06-23T18:26:55+00:00"
         },
         {
+=======
+>>>>>>> origin/main
             "name": "laravel/serializable-closure",
             "version": "v2.0.15",
             "source": {
