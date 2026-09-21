@@ -4,26 +4,23 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
 {
     /**
-     * Contoh pemakaian di route: ->middleware('role:admin')
+     * Pemakaian di route: ->middleware('role:admin') atau ->middleware('role:admin,staff')
      */
-    public function handle(Request $request, Closure $next, string $role): Response
+    public function handle(Request $request, Closure $next, string ...$roles): Response
     {
-        $user = Auth::user();
+        $user = $request->user();
 
         if (! $user) {
-            return redirect()->route('login');
+            return response()->json(['message' => 'Unauthenticated.'], 401);
         }
 
-        $userRole = $user->role?->role_name;
-
-        if ($userRole !== $role) {
-            abort(403, 'Akses ditolak.');
+        if (! $user->hasRole(...$roles)) {
+            return response()->json(['message' => 'Akses ditolak untuk role Anda.'], 403);
         }
 
         return $next($request);

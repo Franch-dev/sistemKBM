@@ -12,7 +12,8 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AdminSeeder::class,
             JurusanDanKelasSeeder::class, // Run pertama: buat 8 jurusan & 48 kelas
-            SekretarisSeeder::class,     // Run kedua: buat 48 akun sekretaris
+            SekretarisSeeder::class,     // Run kedua: buat 48 akun class secretary
+            StaffSeeder::class,          // Akun contoh staff secretary & staff
         ]);
     }
 }

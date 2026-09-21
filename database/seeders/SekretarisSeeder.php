@@ -17,15 +17,17 @@ class SekretarisSeeder extends Seeder
             $cleanName = Str::slug($kelas->nama_kelas, '');
             $email = "sekre.{$cleanName}@sekolah.sch.id";
 
-            DB::table('users')->insert([
-                'name'       => "Sekretaris {$kelas->nama_kelas}",
-                'email'      => strtolower($email),
-                'password'   => Hash::make('password123'),
-                'role_id'    => 2,
-                'kelas_id'   => $kelas->id,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
+            DB::table('users')->updateOrInsert(
+                ['email' => strtolower($email)],
+                [
+                    'name'       => "Sekretaris {$kelas->nama_kelas}",
+                    'password'   => Hash::make('password123'),
+                    'role_id'    => 2, // class_secretary
+                    'kelas_id'   => $kelas->id,
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]
+            );
         }
     }
 }
